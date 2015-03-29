@@ -2,13 +2,18 @@ from tools import list_images
 import numpy as np
 from PIL import Image
 from skimage.transform import resize
+from skimage.feature import hog
 
 
 def extract_features(im):
     """ Returns a feature vector for an image patch. """
 
     # TODO: find other features to use
-    return im.flatten()
+    fd = hog(im, orientations=8, pixels_per_cell=(16, 16),
+                    cells_per_block=(1, 1), visualise=False, normalise=True)
+    # return im.flatten()
+    print fd.size
+    return fd
 
 
 def process_image(im, border_size=5, im_size=50):
