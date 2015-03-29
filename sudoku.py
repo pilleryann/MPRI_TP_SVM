@@ -15,7 +15,7 @@ ver_path = './data/sudokus/sudoku{}.sud'.format(sudoku_nb)
 
 svmTrain = load_or_train();
 
-print("PUtain de chiasse tu va foctionner !")
+
 # Load sudoku image
 # TODO: load the sudoku image as a gray level image
 imageSudukuRaw = np.array(Image.open(im_path).convert('L')); 
@@ -34,12 +34,13 @@ for cell in cellsDatas:
 # TODO: use the classifier to predict on the list of features
 resultPredict = svmTrain.predict(featuresCells)
 
-print("YOUHOU fucking good \n")
+
 
 
 # Load solution to compare with, print metrics, and print confusion matrix
 y_sudoku = np.loadtxt(ver_path).reshape(81)
 # TODO: print classification report
+
 print_classification_report(y_sudoku,resultPredict,title="Classification report")
 # TODO: show confusion matrix
 show_confusion_matrix(y_sudoku,resultPredict,title="Confusion Matrix")
