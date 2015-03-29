@@ -29,6 +29,5 @@ def print_classification_report(y_true, y_pred, title=''):
 
     # TODO: print classification report
 
-    print("Report :"+title)
-    target_names =['0','1','2','3','4','5','6','7','8','9']
-    classification_report(y_true,y_pred,target_names=target_names)
+    print(title)
+    print(classification_report(y_true,y_pred))
