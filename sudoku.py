@@ -6,7 +6,7 @@ import numpy as np
 from image.feature_extraction import extract_features
 
 # Choose a sudoku grid number, and prepare paths (image and verification grid)
-sudoku_nb = 18
+sudoku_nb = 13
 im_path = './data/sudokus/sudoku{}.JPG'.format(sudoku_nb)
 ver_path = './data/sudokus/sudoku{}.sud'.format(sudoku_nb)
 
@@ -46,3 +46,6 @@ print_classification_report(y_sudoku,resultPredict,title="Classification report"
 show_confusion_matrix(y_sudoku,resultPredict,title="Confusion Matrix")
 # Print resulting sudoku
 # TODO: print the resulting sudoku grid (use reshape() function to get a 9x9 grid print!
+y_sudoku.shape = (9,9)
+print '\n'
+print y_sudoku
