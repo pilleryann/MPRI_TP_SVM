@@ -30,20 +30,34 @@ def load_or_train(force_train=False):
     else:
         # Loading all data
         X, y = load_data(data_path)
-
+        kernelList =['linear','rbf','poly','sigmoid']
+        #kernelList =['linear','rbf','poly','sigmoid']
+        kernelSelected=''
+        kernelScore = -1000
+        scores = None
         # Instantiate a classifier
         # TODO: instantiate a new classifier (choose an adapted kernel!)
-        clf = svm.SVC(kernel='linear',C=1.0)
-        # Cross validation
-        # TODO: do cross-validation and print cross-validation result (mean accuracy +/- standard deviation)
-        kfolds = 10
-
-        scores = cross_validation.cross_val_score(clf, X, y, cv=kfolds)
-        print scores
-
+        for oneKernel in kernelList :
+            print("Cross valid kernel :"+oneKernel)
+            clf = svm.SVC(kernel=oneKernel,C=1.0)
+            # Cross validation
+            # TODO: do cross-validation and print cross-validation result (mean accuracy +/- standard deviation)
+            kfolds = 10
+    
+            scores = cross_validation.cross_val_score(clf, X, y, cv=kfolds)
+            if scores.mean() > kernelScore :
+                kernelSelected = oneKernel
+                kernelScore = scores.mean()
+                
+            print "Score : "+"%.3f" % scores.mean()
+        
+        print "Score selected : "+ "%.3f" % scores.mean()
         print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+        print("Kernel selected : "+kernelSelected)
         # Train the classifier on the whole dataset, and save it
         # TODO: train the classifier on the whole dataset
+        clf = svm.SVC(kernel=kernelSelected,C=1.0)
+        
         clf.fit(X,y)
         pickle.dump(clf, open(clf_path, 'wb'))
 

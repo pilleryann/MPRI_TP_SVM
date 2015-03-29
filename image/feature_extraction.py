@@ -9,11 +9,11 @@ def extract_features(im):
     """ Returns a feature vector for an image patch. """
 
     # TODO: find other features to use
-    fd = hog(im, orientations=8, pixels_per_cell=(16, 16),
-                    cells_per_block=(1, 1), visualise=False, normalise=True)
-    # return im.flatten()
-    print fd.size
-    return fd
+    #fd = hog(im, orientations=8, pixels_per_cell=(16, 16),
+     #               cells_per_block=(1, 1), visualise=False, normalise=False)
+    return im.flatten()
+    #print fd.size
+    #return fd
 
 
 def process_image(im, border_size=5, im_size=50):
